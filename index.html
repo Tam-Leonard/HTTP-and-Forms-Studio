@@ -3,17 +3,70 @@
 <head>
 	<meta charset="utf-8">
 	<script>
+		//Step 8: 25.11.4.2. Set the action
+	  let actions = {
+       "google": "https://www.google.com/search",
+	   "duckDuckGo": "https://duckduckgo.com/",
+	   "bing": "https://www.bing.com/search",
+	   "ask": "https://www.ask.com/web"
+       };
 		// TODO: create a handler
     window.addEventListener("load", function(){
         // TODO: register the handler
-    });
-	</script>
+		//Step 5 - 25.11.4. Submit Event Handler
+		const submitButton = document.querySelector("input[type='submit']");
+		//Step 6 - 25.11.4.1. Create and Register the Handler
+		//2nd part
+		submitButton.addEventListener('click', setSearchEngine);
+	});
+
+	
+	//Step 6 - 25.11.4.1. Create and Register the Handler
+	//1st part
+	function setSearchEngine(){ 
+		//step 7: 25.11.4.2. Set the action
+		//let selectedRadioButton = document.querySelector('input[name=engine]:checked');
+		//Step 10: Bonus Mission: prt 1
+		let searchBox = document.querySelector("input[name='q']"); //querySelector cos it doesn't have an id
+		let selectedRadioButton = document.querySelector('input[name=engine]:checked');
+		let searchForm = document.getElementById('searchForm');
+
+		if (searchBox.value === ''){
+			window.alert("Please enter search term!")
+			event.preventDefault(); //stops the submit button from completing request
+		} else if (selectedRadioButton === null) {
+			window.alert("Please select search provider!")
+			event.preventDefault();
+		}
+
+
+    //step 9: 25.11.4.2. Set the action
+		//let searchForm = document.getElementById('searchForm');
+		let selectedURL = actions[selectedRadioButton.value];
+		searchForm.setAttribute('action', selectedURL); 
+		//attribute is name, value, and type so we injectd a key and a value
+		
+	}
+ </script>
 </head>
 
-<body>
+<body style="background-color: #c3b091;"> <!--Bonus Mission to add CSS-->
 
-	<form id="searchForm">
+	<form id="searchForm" style="color: #987654;">
     <!-- TODO: add form elements -->
+	
+	<!--Step 1-->
+	<label><input type="text" name="q"/></label>
+	
+	<!--Steps 2 & 3 radio button and label-->
+	<label><input type="radio" name="engine" value="google">Google</label>
+    <label><input type="radio" name="engine" value="duckDuckGo">DuckDuckGo</label>
+    <label><input type="radio" name="engine" value="bing">Bing</label>
+    <label><input type="radio" name="engine" value="ask">Ask</label>
+	
+	<!--Step 4 submit button-->
+	<input type="submit" style="color:#987654;" value="Go!"> <!--Bonus Mission add CSS-->
+
 	</form>
 
 </body>
